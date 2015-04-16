@@ -17,10 +17,26 @@ namespace RedSocialApi.Controllers
         private RedSocialEntities db = new RedSocialEntities();
 
         // GET: api/Usuarios
-        public IQueryable<Usuario> GetUsuario()
+        public IEnumerable<Usuario> GetUsuario()
         {
             return db.Usuario;
         }
+
+        [ResponseType(typeof(Usuario))]
+        public IHttpActionResult GetUsuario(String login, string password)
+        {
+            var usuario = db.Usuario.FirstOrDefault(o => o.login == login && o.password == password);
+
+            if (usuario == null)
+            {
+                return NotFound();
+            }
+            return Ok(usuario);
+
+        }
+
+
+
 
         // GET: api/Usuarios/5
         [ResponseType(typeof(Usuario))]
