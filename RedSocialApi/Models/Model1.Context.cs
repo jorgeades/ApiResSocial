@@ -18,6 +18,7 @@ namespace RedSocialApi.Models
         public RedSocialEntities()
             : base("name=RedSocialEntities")
         {
+            Configuration.LazyLoadingEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
